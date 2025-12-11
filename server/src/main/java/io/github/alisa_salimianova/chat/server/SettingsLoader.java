@@ -6,13 +6,13 @@ import java.io.IOException;
 
 public class SettingsLoader {
 
-    private final String filePath;
+    private static String filePath;
 
     public SettingsLoader(String filePath) {
         this.filePath = filePath;
     }
 
-    public int getPort() {
+    public static int getPort() {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
 
@@ -28,7 +28,6 @@ public class SettingsLoader {
             System.err.println("Ошибка чтения файла настроек: " + e.getMessage());
         }
 
-        // Значение по умолчанию, чтобы сервер всё равно запускался
         return 12345;
     }
 }

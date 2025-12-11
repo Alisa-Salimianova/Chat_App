@@ -1,25 +1,26 @@
 package io.github.alisa_salimianova.chat;
 
+import io.github.alisa_salimianova.chat.server.LoggerUtil;
 import org.junit.jupiter.api.Test;
-import java.io.File;
+import org.junit.jupiter.api.io.TempDir;
+
 import java.nio.file.Files;
+import java.nio.file.Path;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LoggerUtilTest {
+class LoggerUtilTest {
 
     @Test
-    void testLogWritesToFile() throws Exception {
+    void testLogWritesToFile(@TempDir Path tempDir) throws Exception {
         String testLog = "test-log-entry";
-        String logFile = "test.log";
+        Path logFile = tempDir.resolve("test.log");
 
-        new File(logFile).delete();
+        LoggerUtil.log(logFile.toString(), testLog);
 
-        LoggerUtil.log(logFile, testLog);
+        assertTrue(Files.exists(logFile), "Log file must be created");
 
-        File f = new File(logFile);
-        assertTrue(f.exists(), "Log file must be created");
-
-        String content = Files.readString(f.toPath());
+        String content = Files.readString(logFile);
         assertTrue(content.contains(testLog));
     }
 }

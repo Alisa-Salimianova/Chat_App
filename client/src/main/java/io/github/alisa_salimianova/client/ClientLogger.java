@@ -21,13 +21,11 @@ public class ClientLogger {
         this.logFile = new File(filePath);
 
         try {
-            // создаём родительские каталоги
             File parent = logFile.getParentFile();
             if (parent != null) {
                 parent.mkdirs();
             }
 
-            // создаём файл
             if (!logFile.exists()) {
                 logFile.createNewFile();
             }

@@ -1,5 +1,6 @@
 package io.github.alisa_salimianova.chat;
 
+import io.github.alisa_salimianova.chat.server.SettingsLoader;
 import org.junit.jupiter.api.Test;
 import java.io.FileWriter;
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +14,7 @@ public class SettingsLoaderTest {
             fw.write("PORT=5555");
         }
 
-        int port = SettingsLoader.loadPort(file);
+        int port = SettingsLoader.getPort();
 
         assertEquals(5555, port);
     }
